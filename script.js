@@ -1,27 +1,130 @@
 /*
-  Portfolio Interactions
-  ----------------------
-  Keep behavior modular:
-  - Scroll progress bar
-  - Reveal on scroll animation
-  - Mobile menu toggle
-  - Active nav links by section
-  - Dynamic footer year
+  Portfolio Interactions and Data
+  -------------------------------
+  Update the arrays below to add new projects, learning log entries,
+  and weekly progress checkpoints without touching the HTML.
 */
 
-// Utility shortcut for query selection
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
-// 1) Dynamic year in footer
-const yearEl = $("#year");
-if (yearEl) {
-  yearEl.textContent = new Date().getFullYear();
+const projects = [
+  {
+    title: "Port Scanner (Upcoming)",
+    description: "A focused networking utility for scanning common ports and learning how exposed services are discovered in real environments.",
+    stack: ["Python", "Sockets", "CLI"],
+    github: "#",
+    status: "Upcoming"
+  },
+  {
+    title: "Log Analyzer (Upcoming)",
+    description: "A log parsing and summarization tool intended to strengthen debugging, pattern detection, and security monitoring fundamentals.",
+    stack: ["Python", "Regex", "Automation"],
+    github: "#",
+    status: "Upcoming"
+  },
+  {
+    title: "Security Tools Collection (Upcoming)",
+    description: "A growing repository of small, practical security-focused scripts that can evolve alongside daily learning and experiments.",
+    stack: ["Python", "Linux", "Utilities"],
+    github: "#",
+    status: "Upcoming"
+  }
+];
+
+const learningLog = [
+  {
+    label: "Day 1",
+    title: "Linux basics and terminal navigation",
+    description: "Focused on moving confidently through the command line and understanding the structure of a Linux environment."
+  },
+  {
+    label: "Day 2",
+    title: "File system and command practice",
+    description: "Worked through file operations, permissions, and repeatable terminal workflows to build stronger habits."
+  }
+];
+
+const weeklyProgress = [
+  {
+    title: "Linux and CLI confidence",
+    summary: "Strengthening daily command line usage and core operating system familiarity.",
+    percent: 72
+  },
+  {
+    title: "Networking fundamentals",
+    summary: "Building a more practical understanding of IP, DNS, and HTTP behavior.",
+    percent: 61
+  },
+  {
+    title: "Python for security tooling",
+    summary: "Turning scripting practice into small utilities that can grow into real projects.",
+    percent: 68
+  }
+];
+
+function renderProjects() {
+  const container = $("#projects-grid");
+  if (!container) return;
+
+  container.innerHTML = projects
+    .map(
+      (project) => `
+        <article class="project-card reveal">
+          <div class="project-top">
+            <span class="status-badge">${project.status}</span>
+          </div>
+          <h3 class="project-title">${project.title}</h3>
+          <p class="project-copy">${project.description}</p>
+          <div class="stack-list">
+            ${project.stack.map((item) => `<span class="stack-tag">${item}</span>`).join("")}
+          </div>
+          <div class="project-links">
+            <a class="project-link ${project.github === "#" ? "placeholder" : ""}" href="${project.github}" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </article>
+      `
+    )
+    .join("");
 }
 
-// 2) Scroll progress bar
-const progressBar = $("#scroll-progress");
+function renderLearningLog() {
+  const container = $("#learning-log");
+  if (!container) return;
+
+  container.innerHTML = learningLog
+    .map(
+      (entry) => `
+        <article class="journal-entry">
+          <strong>${entry.label}: ${entry.title}</strong>
+          <p class="journal-copy">${entry.description}</p>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function renderWeeklyProgress() {
+  const container = $("#weekly-progress");
+  if (!container) return;
+
+  container.innerHTML = weeklyProgress
+    .map(
+      (item) => `
+        <article class="progress-entry">
+          <strong>${item.title}</strong>
+          <p class="progress-copy">${item.summary}</p>
+          <div class="progress-bar" aria-hidden="true">
+            <span style="width: ${item.percent}%"></span>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+}
+
 function updateScrollProgress() {
+  const progressBar = $("#scroll-progress");
   if (!progressBar) return;
 
   const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -29,13 +132,15 @@ function updateScrollProgress() {
   const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
   progressBar.style.width = `${progress}%`;
 }
-window.addEventListener("scroll", updateScrollProgress, { passive: true });
-window.addEventListener("resize", updateScrollProgress);
-updateScrollProgress();
 
-// 3) Reveal animation on scroll
-const revealEls = $$(".reveal");
-if ("IntersectionObserver" in window) {
+function setupRevealAnimations() {
+  const revealElements = $$(".reveal");
+
+  if (!("IntersectionObserver" in window)) {
+    revealElements.forEach((element) => element.classList.add("visible"));
+    return;
+  }
+
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
@@ -45,90 +150,73 @@ if ("IntersectionObserver" in window) {
         }
       });
     },
-    { threshold: 0.15 }
+    { threshold: 0.16 }
   );
 
-  revealEls.forEach((el) => observer.observe(el));
-} else {
-  // Fallback for older browsers
-  revealEls.forEach((el) => el.classList.add("visible"));
+  revealElements.forEach((element) => observer.observe(element));
 }
 
-// 4) Mobile menu toggle
-const menuToggle = $("#menu-toggle");
-const mobileMenu = $("#mobile-menu");
-const mobileLinks = $$(".mobile-link");
+function setupNavigation() {
+  const menuToggle = $("#menu-toggle");
+  const siteNav = $("#site-nav");
+  const navLinks = $$(".nav-link");
+  const sections = $$("main section[id]");
 
-function closeMobileMenu() {
-  if (!menuToggle || !mobileMenu) return;
-  mobileMenu.classList.add("hidden");
-  menuToggle.setAttribute("aria-expanded", "false");
-}
+  function closeMenu() {
+    if (!siteNav || !menuToggle) return;
+    siteNav.classList.remove("is-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  }
 
-if (menuToggle && mobileMenu) {
-  menuToggle.addEventListener("click", () => {
-    const isHidden = mobileMenu.classList.contains("hidden");
-    mobileMenu.classList.toggle("hidden");
-    menuToggle.setAttribute("aria-expanded", String(isHidden));
-  });
-
-  mobileLinks.forEach((link) => {
-    link.addEventListener("click", closeMobileMenu);
-  });
-
-  // Close menu automatically when entering desktop view
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 768) closeMobileMenu();
-  });
-}
-
-// 5) Highlight active nav section
-const sections = $$("main section[id]");
-const navLinks = $$("a.nav-link, a.mobile-link");
-
-function setActiveLink() {
-  const currentPos = window.scrollY + 140;
-  let currentId = "";
-
-  sections.forEach((section) => {
-    const top = section.offsetTop;
-    const bottom = top + section.offsetHeight;
-    if (currentPos >= top && currentPos < bottom) {
-      currentId = section.id;
-    }
-  });
+  if (menuToggle && siteNav) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = siteNav.classList.toggle("is-open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+  }
 
   navLinks.forEach((link) => {
-    const href = link.getAttribute("href");
-    const isActive = href === `#${currentId}`;
-    link.classList.toggle("text-brand-400", isActive);
-    link.classList.toggle("font-semibold", isActive);
+    link.addEventListener("click", closeMenu);
+  });
+
+  function setActiveLink() {
+    const currentPosition = window.scrollY + 180;
+    let currentId = sections[0]?.id || "";
+
+    sections.forEach((section) => {
+      const top = section.offsetTop;
+      const bottom = top + section.offsetHeight;
+      if (currentPosition >= top && currentPosition < bottom) {
+        currentId = section.id;
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.toggle("is-active", link.getAttribute("href") === `#${currentId}`);
+    });
+  }
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 760) closeMenu();
+    setActiveLink();
+  });
+  window.addEventListener("scroll", setActiveLink, { passive: true });
+  setActiveLink();
+}
+
+function preventPlaceholderJump() {
+  $$('a[href="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => event.preventDefault());
   });
 }
 
-window.addEventListener("scroll", setActiveLink, { passive: true });
-window.addEventListener("resize", setActiveLink);
-setActiveLink();
+renderProjects();
+renderLearningLog();
+renderWeeklyProgress();
+setupRevealAnimations();
+setupNavigation();
+preventPlaceholderJump();
+updateScrollProgress();
 
-// 6) Contact form mailto fallback (no backend required)
-const contactForm = $("#contact-form");
-if (contactForm) {
-  contactForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const name = $("#name", contactForm)?.value?.trim() || "";
-    const email = $("#email", contactForm)?.value?.trim() || "";
-    const message = $("#message", contactForm)?.value?.trim() || "";
-
-    const subject = encodeURIComponent(`Portfolio Contact from ${name || "Website Visitor"}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-    window.location.href = `mailto:alekhyanimmala4001@gmail.com?subject=${subject}&body=${body}`;
-  });
-}
-
-// 7) Prevent placeholder anchors from jumping to top
-$$("a.link-placeholder").forEach((link) => {
-  link.addEventListener("click", (event) => {
-    if (link.getAttribute("href") === "#") event.preventDefault();
-  });
-});
+window.addEventListener("scroll", updateScrollProgress, { passive: true });
+window.addEventListener("resize", updateScrollProgress);

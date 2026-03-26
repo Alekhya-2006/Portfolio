@@ -5,355 +5,363 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Portfolio website of a cybersecurity and software engineering student focused on Python development and practical security."
+      content="Alekhya's portfolio website focused on cybersecurity, DevSecOps, security tooling, and disciplined technical growth."
     />
     <meta
       name="keywords"
-      content="cybersecurity, software engineering, python developer, web security, student portfolio"
+      content="Alekhya, cybersecurity portfolio, DevSecOps student, computer science, security tools, internship portfolio"
     />
-    <meta name="author" content="Alekhya Nimmala" />
-    <meta property="og:title" content="Alekhya Nimmala | Cybersecurity Portfolio" />
+    <meta name="author" content="Alekhya" />
+    <meta property="og:title" content="Alekhya | Cybersecurity & DevSecOps Portfolio" />
     <meta
       property="og:description"
-      content="Cybersecurity Student | Python Developer | Security Enthusiast"
+      content="Cybersecurity-focused Computer Science student building practical security tools and systems."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://yourusername.github.io/portfolio/" />
-    <title>Alekhya Nimmala | Cybersecurity Portfolio</title>
-
-    <!-- Tailwind CSS CDN (fast start; can be swapped for build pipeline later) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              brand: {
-                50: "#ecfeff",
-                400: "#22d3ee",
-                500: "#06b6d4",
-                600: "#0891b2"
-              },
-              slatex: {
-                950: "#020617"
-              }
-            },
-            boxShadow: {
-              glow: "0 0 25px rgba(34, 211, 238, 0.18)"
-            }
-          }
-        }
-      };
-    </script>
+    <title>Alekhya | Cybersecurity & DevSecOps Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="bg-slate-950 text-slate-100 antialiased selection:bg-brand-500/30">
-    <a href="#about" class="skip-link">Skip to main content</a>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
+    <div class="page-shell" aria-hidden="true">
+      <div class="gradient-orb orb-one"></div>
+      <div class="gradient-orb orb-two"></div>
+      <div class="grid-overlay"></div>
+    </div>
 
-    <!-- Scroll progress bar -->
-    <div id="scroll-progress" class="scroll-progress"></div>
-
-    <!-- Background visuals -->
-    <div class="noise-overlay" aria-hidden="true"></div>
-    <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
-    <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
-
-    <!-- Header / Navbar -->
-    <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur">
-      <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-        <!-- Edit your brand text here -->
-        <a href="#home" class="text-sm font-semibold tracking-wide text-white">ALEKHYA<span class="text-brand-400">.dev</span></a>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand-mark" href="#home" aria-label="Alekhya portfolio home">
+          <span class="brand-dot"></span>
+          <span class="brand-text">Alekhya</span>
+        </a>
 
         <button
           id="menu-toggle"
-          class="inline-flex items-center rounded-md border border-white/20 px-3 py-2 text-sm text-slate-200 md:hidden"
+          class="menu-toggle"
+          type="button"
           aria-expanded="false"
-          aria-controls="mobile-menu"
+          aria-controls="site-nav"
         >
           Menu
         </button>
 
-        <ul class="hidden items-center gap-6 text-sm text-slate-300 md:flex">
-          <li><a class="nav-link" href="#about">About</a></li>
-          <li><a class="nav-link" href="#skills">Skills</a></li>
-          <li><a class="nav-link" href="#projects">Projects</a></li>
-          <li><a class="nav-link" href="#journey">Journey</a></li>
-          <li><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-
-      <div id="mobile-menu" class="hidden border-t border-white/10 bg-slate-900/95 md:hidden">
-        <ul class="space-y-1 px-4 py-3 text-sm text-slate-200">
-          <li><a class="mobile-link block rounded px-2 py-2" href="#about">About</a></li>
-          <li><a class="mobile-link block rounded px-2 py-2" href="#skills">Skills</a></li>
-          <li><a class="mobile-link block rounded px-2 py-2" href="#projects">Projects</a></li>
-          <li><a class="mobile-link block rounded px-2 py-2" href="#journey">Journey</a></li>
-          <li><a class="mobile-link block rounded px-2 py-2" href="#contact">Contact</a></li>
-        </ul>
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="#skills">Skills</a>
+          <a class="nav-link" href="#projects">Projects</a>
+          <a class="nav-link" href="#journey">Learning</a>
+          <a class="nav-link" href="#links">Links</a>
+          <a class="nav-link" href="#goals">Goals</a>
+        </nav>
       </div>
     </header>
 
-    <main id="home" class="relative">
-      <!-- Hero Section -->
-      <section class="mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-4 pb-20 pt-28 sm:px-6">
-        <p class="reveal mb-3 text-sm uppercase tracking-[0.2em] text-brand-400">Cybersecurity & Software Engineering</p>
-        <p class="reveal badge mt-2 w-fit">Open to internships and security-focused opportunities</p>
-        <!-- Edit your name/title/tagline below -->
-        <h1 class="reveal max-w-4xl text-4xl font-extrabold leading-tight text-white sm:text-5xl md:text-6xl">
-          Hi, I'm <span class="text-brand-400">Alekhya Nimmala</span>
-        </h1>
-        <p class="reveal mt-4 max-w-3xl text-lg font-medium text-slate-200 sm:text-xl">
-          Cybersecurity Student | Python Developer | Security Enthusiast
-        </p>
-        <p class="reveal mt-4 max-w-2xl text-base text-slate-400">
-          Aspiring cybersecurity engineer focused on building secure systems and learning ethical hacking.
-        </p>
-        <div class="reveal mt-5 flex flex-wrap gap-2">
-          <span class="info-pill">Python Security Tools</span>
-          <span class="info-pill">Web Vulnerability Analysis</span>
-          <span class="info-pill">Linux and Networking Foundations</span>
-        </div>
-        <div class="reveal mt-8 flex flex-wrap gap-3">
-          <a href="#projects" class="btn-primary">View Projects</a>
-          <a href="#contact" class="btn-secondary">Contact Me</a>
-        </div>
-        <div class="reveal mt-9 grid gap-3 sm:grid-cols-3">
-          <article class="hero-metric">
-            <p class="hero-metric-label">Primary Focus</p>
-            <p class="hero-metric-value">Secure Software Development</p>
-          </article>
-          <article class="hero-metric">
-            <p class="hero-metric-label">Current Track</p>
-            <p class="hero-metric-value">Python + Security Fundamentals</p>
-          </article>
-          <article class="hero-metric">
-            <p class="hero-metric-label">Career Direction</p>
-            <p class="hero-metric-value">Cybersecurity Engineering</p>
-          </article>
+    <main id="main-content">
+      <section class="hero-section" id="home">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow reveal">Cybersecurity Portfolio</p>
+            <div class="hero-intro reveal">
+              <span class="hero-chip">Open to internships</span>
+              <span class="hero-chip hero-chip-muted">Target: June 2026</span>
+            </div>
+            <h1 class="hero-title reveal">
+              Building Security Tools &amp; Systems
+              <span>| Cybersecurity &amp; DevSecOps Focused</span>
+            </h1>
+            <p class="hero-name reveal">Alekhya</p>
+            <p class="hero-description reveal">
+              I am a Computer Science student focused on cybersecurity and DevSecOps, with a
+              strong emphasis on building practical security tools and understanding real-world
+              systems. Currently developing hands-on skills in Linux, networking, and Python,
+              while consistently documenting my progress and projects. Actively working towards
+              securing an internship by June 2026 and contributing to open-source security
+              projects.
+            </p>
+            <div class="cta-row reveal">
+              <a href="#projects" class="button button-primary">View Projects</a>
+              <a
+                href="https://github.com/Alekhya-2006"
+                class="button button-secondary"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/alekhyanimmala4001"
+                class="button button-secondary"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+            </div>
+            <div class="hero-metrics reveal">
+              <article class="metric-card">
+                <span class="metric-label">Current Direction</span>
+                <strong>Cybersecurity + DevSecOps</strong>
+              </article>
+              <article class="metric-card">
+                <span class="metric-label">Learning Style</span>
+                <strong>Build, document, improve</strong>
+              </article>
+              <article class="metric-card">
+                <span class="metric-label">Long-Term Goal</span>
+                <strong>AI/ML Security Engineer</strong>
+              </article>
+            </div>
+          </div>
+
+          <aside class="hero-panel reveal" aria-label="Quick profile summary">
+            <p class="panel-kicker">Professional Snapshot</p>
+            <h2>Focused on practical growth, not just coursework.</h2>
+            <div class="profile-stack">
+              <article class="profile-item">
+                <span class="profile-label">Primary Interest</span>
+                <p>Security tooling, Linux workflows, and DevSecOps foundations.</p>
+              </article>
+              <article class="profile-item">
+                <span class="profile-label">Recruiter Signal</span>
+                <p>Consistent learner with a visible roadmap and clear internship target.</p>
+              </article>
+              <article class="profile-item">
+                <span class="profile-label">Current Practice</span>
+                <p>Python scripting, networking concepts, terminal skills, and system thinking.</p>
+              </article>
+            </div>
+            <div class="focus-panel">
+              <div>
+                <span class="focus-label">Internship Window</span>
+                <strong>June 2026</strong>
+              </div>
+              <div>
+                <span class="focus-label">Portfolio Theme</span>
+                <strong>Consistency and momentum</strong>
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
 
-      <!-- About Section -->
-      <section id="about" class="section-wrap">
-        <div class="section-card reveal">
-          <h2 class="section-title">About Me</h2>
-          <p class="section-copy">
-            I am a cybersecurity enthusiast currently learning Python and security fundamentals. My focus is on understanding how systems break and how to build them more securely. I am actively working on hands-on projects in Python, security tools, and web vulnerabilities. My goal is to contribute to open-source security projects, gain practical experience through internships, and eventually work in advanced cybersecurity roles.
-          </p>
-          <div class="mt-6">
-            <h3 class="text-base font-semibold text-white">Professional Strengths</h3>
-            <ul class="section-copy mt-2 list-disc pl-5">
-              <li>Consistent hands-on learning with security-focused mini projects</li>
-              <li>Strong interest in secure coding and practical attack/defense concepts</li>
-              <li>Clear long-term roadmap toward advanced cybersecurity roles</li>
-            </ul>
+      <section id="about" class="section-block">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow">About</p>
+            <h2 class="section-title">A focused early-career profile built around security systems.</h2>
+            <p class="section-description">
+              This portfolio is designed to make the current stage clear: strong foundations,
+              disciplined execution, and a roadmap toward deeper security engineering work.
+            </p>
+          </div>
+
+          <div class="about-grid">
+            <article class="surface-card reveal">
+              <h3 class="card-title">Career Focus</h3>
+              <ul class="detail-list">
+                <li>Cybersecurity Intern</li>
+                <li>DevSecOps Intern</li>
+                <li>Long-term: AI/ML Security Engineer</li>
+              </ul>
+            </article>
+
+            <article class="surface-card reveal">
+              <h3 class="card-title">Current Positioning</h3>
+              <p class="body-copy">
+                Building the technical depth needed for real-world security work through hands-on
+                projects, steady documentation, and practical systems knowledge rather than
+                theory alone.
+              </p>
+            </article>
+
+            <article class="surface-card surface-card-accent reveal">
+              <h3 class="card-title">Internship Timeline</h3>
+              <p class="timeline-banner">
+                Actively preparing for Cybersecurity / DevSecOps internships - June 2026
+              </p>
+            </article>
           </div>
         </div>
       </section>
 
-      <!-- Skills Section -->
-      <section id="skills" class="section-wrap">
-        <div class="reveal mb-8">
-          <h2 class="section-title">Skills</h2>
-          <p class="section-copy">Core technologies and tools I currently use.</p>
-        </div>
-
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <!-- Programming -->
-          <article class="skill-card reveal">
-            <h3 class="skill-heading">Programming</h3>
-            <ul class="skill-list">
-              <li>Python</li>
-              <li>Bash (Learning)</li>
-            </ul>
-          </article>
-
-          <!-- Security -->
-          <article class="skill-card reveal">
-            <h3 class="skill-heading">Security</h3>
-            <ul class="skill-list">
-              <li>Web Security Fundamentals</li>
-              <li>Linux Basics</li>
-              <li>Networking Basics</li>
-              <li>OWASP Top 10 (Learning)</li>
-            </ul>
-          </article>
-
-          <!-- Tools -->
-          <article class="skill-card reveal">
-            <h3 class="skill-heading">Tools</h3>
-            <ul class="skill-list">
-              <li>Git & GitHub</li>
-              <li>Linux</li>
-              <li>VS Code</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <!-- Projects Section -->
-      <section id="projects" class="section-wrap">
-        <div class="reveal mb-8">
-          <h2 class="section-title">Projects</h2>
-          <p class="section-copy">Hands-on cybersecurity projects focused on practical tooling, secure development, and system-level learning.</p>
-        </div>
-
-        <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          <article class="project-card reveal">
-            <p class="project-status">In Progress</p>
-            <h3 class="project-title">Python Port Scanner</h3>
-            <p class="project-description">
-              A command line tool that scans open ports on a target host to identify exposed services.
+      <section id="skills" class="section-block">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Skills</p>
+            <h2 class="section-title">Core foundations being strengthened through daily practice.</h2>
+            <p class="section-description">
+              Structured for quick recruiter review, with emphasis on practical areas relevant to
+              security and systems work.
             </p>
-            <p class="project-tech">Tech: Python, Socket Programming</p>
-            <div class="mt-4 flex gap-3">
-              <a href="#" class="project-link link-placeholder">GitHub (Add Link)</a>
-              <a href="#" class="project-link link-placeholder">Live Demo (Optional)</a>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <p class="project-status">In Progress</p>
-            <h3 class="project-title">Password Strength Checker</h3>
-            <p class="project-description">
-              A Python tool that analyzes password strength using entropy and common password lists.
-            </p>
-            <p class="project-tech">Tech: Python</p>
-            <div class="mt-4 flex gap-3">
-              <a href="#" class="project-link link-placeholder">GitHub (Add Link)</a>
-              <a href="#" class="project-link link-placeholder">Live Demo (Optional)</a>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <p class="project-status">Educational Project</p>
-            <h3 class="project-title">Simple Keylogger (Educational)</h3>
-            <p class="project-description">
-              A Python-based keylogger built to understand how malicious software works and how to defend against it.
-            </p>
-            <p class="project-tech">Tech: Python</p>
-            <div class="mt-4 flex gap-3">
-              <a href="#" class="project-link link-placeholder">GitHub (Add Link)</a>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <p class="project-status">In Progress</p>
-            <h3 class="project-title">Network Packet Sniffer</h3>
-            <p class="project-description">
-              A Python tool that captures and analyzes network packets for learning network security.
-            </p>
-            <p class="project-tech">Tech: Python, Scapy</p>
-            <div class="mt-4 flex gap-3">
-              <a href="#" class="project-link link-placeholder">GitHub (Add Link)</a>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <p class="project-status">Documentation</p>
-            <h3 class="project-title">Linux Security Setup Guide</h3>
-            <p class="project-description">
-              A documentation project explaining how to secure a Linux machine using best practices.
-            </p>
-            <p class="project-tech">Tech: Markdown, Linux</p>
-            <div class="mt-4 flex gap-3">
-              <a href="#" class="project-link link-placeholder">GitHub (Add Link)</a>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <p class="project-status">Learning Project</p>
-            <h3 class="project-title">Basic Vulnerability Scanner (Learning Project)</h3>
-            <p class="project-description">
-              A Python script that checks websites for basic vulnerabilities such as open ports and outdated services.
-            </p>
-            <p class="project-tech">Tech: Python</p>
-            <div class="mt-4 flex gap-3">
-              <a href="#" class="project-link link-placeholder">GitHub (Add Link)</a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Experience / Learning Journey -->
-      <section id="journey" class="section-wrap">
-        <div class="reveal mb-8">
-          <h2 class="section-title">Learning Journey & Career Goals</h2>
-          <p class="section-copy">A structured roadmap showing my growth, current focus, and next milestones.</p>
-        </div>
-
-        <div class="timeline">
-          <article class="timeline-item reveal">
-            <span class="timeline-date">2026</span>
-            <h3 class="timeline-title">Started Cybersecurity Journey</h3>
-            <p class="timeline-copy">Began learning Python, Linux, and networking fundamentals to build a strong base in cybersecurity.</p>
-          </article>
-          <article class="timeline-item reveal">
-            <span class="timeline-date">2026</span>
-            <h3 class="timeline-title">Security Tools & Projects</h3>
-            <p class="timeline-copy">Started building small security tools like port scanners and packet sniffers.</p>
-          </article>
-          <article class="timeline-item reveal">
-            <span class="timeline-date">2026 Summer (Goal)</span>
-            <h3 class="timeline-title">Cybersecurity Internship</h3>
-            <p class="timeline-copy">Aiming to gain practical experience through security internships and bug bounty practice.</p>
-          </article>
-          <article class="timeline-item reveal">
-            <span class="timeline-date">2027 (Goal)</span>
-            <h3 class="timeline-title">Open Source Security Contributions</h3>
-            <p class="timeline-copy">Plan to contribute to security projects such as OWASP tools.</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- Contact Section -->
-      <section id="contact" class="section-wrap pb-20">
-        <div class="grid gap-6 lg:grid-cols-2">
-          <div class="section-card reveal">
-            <h2 class="section-title">Let's Connect</h2>
-            <p class="section-copy mb-4">Open to cybersecurity internships, collaboration opportunities, and technical networking.</p>
-            <!-- Edit contact links -->
-            <ul class="space-y-3 text-sm text-slate-300">
-              <li>Email: <a class="contact-link" href="mailto:alekhyanimmala4001@gmail.com">alekhyanimmala4001@gmail.com</a></li>
-              <li>GitHub: <a class="contact-link link-placeholder" href="#" rel="noopener noreferrer">Add GitHub URL Later</a></li>
-              <li>LinkedIn: <a class="contact-link link-placeholder" href="#" rel="noopener noreferrer">Add LinkedIn URL Later</a></li>
-            </ul>
-            <p class="mt-5 text-sm text-slate-400">Response time: Usually within 24-48 hours.</p>
           </div>
 
-          <form id="contact-form" class="section-card reveal">
-            <h3 class="text-lg font-semibold text-white">Send a Message</h3>
-            <p class="mb-4 mt-1 text-sm text-slate-400">No backend needed: this form opens your email app with a pre-filled message.</p>
+          <div class="skills-grid">
+            <article class="skill-card reveal">
+              <div class="skill-icon">01</div>
+              <h3>Linux</h3>
+              <p>CLI, file systems, permissions, and working comfortably in terminal-first environments.</p>
+            </article>
+            <article class="skill-card reveal">
+              <div class="skill-icon">02</div>
+              <h3>Git &amp; GitHub</h3>
+              <p>Version control, repository workflows, documentation habits, and project tracking.</p>
+            </article>
+            <article class="skill-card reveal">
+              <div class="skill-icon">03</div>
+              <h3>Python</h3>
+              <p>Scripting for automation, utility building, and security-oriented problem solving.</p>
+            </article>
+            <article class="skill-card reveal">
+              <div class="skill-icon">04</div>
+              <h3>Networking Fundamentals</h3>
+              <p>IP, DNS, HTTP, and the system-level context needed for troubleshooting and security analysis.</p>
+            </article>
+            <article class="skill-card reveal">
+              <div class="skill-icon">05</div>
+              <h3>SQL</h3>
+              <p>Database basics, query writing, and a growing understanding of data flow and storage.</p>
+            </article>
+            <article class="skill-card reveal">
+              <div class="skill-icon">06</div>
+              <h3>C / Java</h3>
+              <p>Foundational programming knowledge supporting systems thinking and problem solving.</p>
+            </article>
+          </div>
+        </div>
+      </section>
 
-            <label class="mb-2 block text-sm text-slate-300" for="name">Name</label>
-            <input class="form-input" id="name" name="name" type="text" placeholder="Your name" required />
+      <section id="projects" class="section-block">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Projects</p>
+            <h2 class="section-title">A portfolio structured for growth, with room to add real implementations fast.</h2>
+            <p class="section-description">
+              Project cards are rendered from a small data array in <code>script.js</code> so
+              titles, descriptions, stacks, and links can be updated in one place later.
+            </p>
+          </div>
 
-            <label class="mb-2 mt-4 block text-sm text-slate-300" for="email">Email</label>
-            <input class="form-input" id="email" name="email" type="email" placeholder="you@example.com" required />
+          <div class="projects-grid" id="projects-grid"></div>
+        </div>
+      </section>
 
-            <label class="mb-2 mt-4 block text-sm text-slate-300" for="message">Message</label>
-            <textarea class="form-input min-h-28 resize-y" id="message" name="message" placeholder="Your message..." required></textarea>
+      <section id="journey" class="section-block section-highlight">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Learning Journey</p>
+            <h2 class="section-title">Consistency is treated as a visible part of the portfolio.</h2>
+            
 
-            <button class="btn-primary mt-5 w-full justify-center" type="submit">Send</button>
-          </form>
+          <div class="journey-grid">
+            <article class="surface-card journal-card reveal">
+              <div class="section-minihead">
+                <h3 class="card-title">Daily Learning Log</h3>
+                
+              </div>
+              <div class="journal-list" id="learning-log"></div>
+            </article>
+
+            <article class="surface-card progress-card reveal">
+              <div class="section-minihead">
+                <h3 class="card-title">Weekly Progress Tracker</h3>
+                <p class="card-caption">A quick visual summary of what is being built right now.</p>
+              </div>
+              <div class="progress-list" id="weekly-progress"></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="links" class="section-block">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow">GitHub &amp; Links</p>
+            <h2 class="section-title">Clear contact and profile access for quick recruiter follow-up.</h2>
+          </div>
+
+          <div class="links-grid">
+            <article class="surface-card link-card reveal">
+              <span class="link-label">GitHub</span>
+              <h3 class="card-title">Alekhya-2006</h3>
+              <a class="inline-link" href="https://github.com/Alekhya-2006" target="_blank" rel="noreferrer">
+                https://github.com/Alekhya-2006
+              </a>
+            </article>
+            <article class="surface-card link-card reveal">
+              <span class="link-label">LinkedIn</span>
+              <h3 class="card-title">Professional Profile</h3>
+              <a class="inline-link" href="https://www.linkedin.com/in/alekhyanimmala4001" target="_blank" rel="noreferrer">
+                linkedin.com/in/alekhyanimmala4001
+              </a>
+            </article>
+            <article class="surface-card link-card reveal">
+              <span class="link-label">Email</span>
+              <h3 class="card-title">Direct Contact</h3>
+              <a class="inline-link" href="mailto:joykutti333@gmail.com">joykutti333@gmail.com</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="resume" class="section-block">
+        <div class="container">
+          <div class="resume-banner reveal">
+            <div>
+              <p class="eyebrow">Resume</p>
+              <h2 class="section-title">Keep the download action obvious and recruiter-friendly.</h2>
+              <p class="section-description">
+                Replace the placeholder with a PDF file path later, such as <code>assets/resume.pdf</code>.
+              </p>
+            </div>
+            <a class="button button-primary button-placeholder" href="#">Download Resume</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="goals" class="section-block">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Future Goals</p>
+            <h2 class="section-title">A roadmap that signals ambition while staying grounded.</h2>
+          </div>
+
+          <div class="goals-grid">
+            <article class="surface-card reveal">
+              <h3 class="card-title">Open Source Contributions</h3>
+              <p class="body-copy">Preparing for Outreachy-style contribution workflows and public collaboration.</p>
+            </article>
+            <article class="surface-card reveal">
+              <h3 class="card-title">DevSecOps Tools</h3>
+              <p class="body-copy">Building and understanding security-focused automation and workflow tooling.</p>
+            </article>
+            <article class="surface-card reveal">
+              <h3 class="card-title">AI/ML Security</h3>
+              <p class="body-copy">Growing toward long-term work at the intersection of intelligent systems and secure engineering.</p>
+            </article>
+          </div>
         </div>
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-white/10 bg-slate-950/80">
-      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-6 text-sm text-slate-400 sm:flex-row sm:px-6">
-        <p>&copy; <span id="year"></span> Alekhya Nimmala. All rights reserved.</p>
-        <div class="flex items-center gap-4">
-          <a class="contact-link link-placeholder" href="#" rel="noopener noreferrer">GitHub</a>
-          <a class="contact-link link-placeholder" href="#" rel="noopener noreferrer">LinkedIn</a>
-          <a class="contact-link" href="mailto:alekhyanimmala4001@gmail.com">Email</a>
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <div>
+          <p class="footer-name">Alekhya</p>
+          <p class="footer-line">Consistently building, learning, and improving.</p>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/Alekhya-2006" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/alekhyanimmala4001" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="mailto:joykutti333@gmail.com">Email</a>
         </div>
       </div>
     </footer>
